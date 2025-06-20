@@ -1,0 +1,28 @@
+{
+  "Name": "ps-billing",
+  "Comment": "Sample permission set for billing access",
+  "Description": "Billing access in AWS",
+  "SessionDuration": "PT4H",
+  "ManagedPolicies": [
+    "arn:aws:iam::aws:policy/job-function/Billing",
+    "arn:aws:iam::aws:policy/job-function/SupportUser",
+    "arn:aws:iam::aws:policy/AWSSupportAccess",
+    "arn:aws:iam::aws:policy/job-function/ViewOnlyAccess"
+  ],
+  "CustomerPolicies": [],
+  "CustomPolicy": {},
+  "PermissionBoundary": {
+    "ManagedPolicy": "",
+    "CustomerPolicy": ""
+  },
+  "Assignments": [
+    {
+      "all_accounts": true,
+      "principal": "AWSControlTowerAdmins",
+      "type": "GROUP",
+      "account_id": [],
+      "account_ou": [],
+      "account_tag": []
+    }
+  ]
+}

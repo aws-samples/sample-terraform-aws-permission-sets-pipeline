@@ -1,11 +1,27 @@
-## My Project
+# AWS Permission Set Pipeline
 
-TODO: Fill this README out!
+## Table of Contents
 
-Be sure to:
+- [Diagram](#diagram)
+- [Prerequisites](#prerequisites)
+- [Limitations](#limitations)
+- [Versions](#versions)
+- [Security](#security)
+- [License](#license)
 
-* Change the title in this README
-* Edit your repository description on GitHub
+## Diagram
+
+![diagram](assets/diagram/aws-ps-pipeline.jpg)
+
+---
+
+## Prerequisites
+
+## Limitations
+
+## Versions
+
+- Terraform: >=1.6
 
 ## Security
 
@@ -14,4 +30,3 @@ See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more inform
 ## License
 
 This library is licensed under the MIT-0 License. See the LICENSE file.
-
