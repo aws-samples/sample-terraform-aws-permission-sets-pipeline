@@ -102,15 +102,15 @@ This library is licensed under the MIT-0 License. See the LICENSE file.
 
 | Name | Version |
 |------|---------|
-| terraform | >=1.5 |
-| aws | ~>5.0 |
+| terraform | >=1.6 |
+| aws | =>5.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | ~>5.0 |
-| aws.event-source-account | ~>5.0 |
+| aws | =>5.0 |
+| aws.event-source-account | =>5.0 |
 
 ## Modules
 

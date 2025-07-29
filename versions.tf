@@ -2,11 +2,11 @@
 # SPDX-License-Identifier: MIT-0
 
 terraform {
-  required_version = ">=1.5"
+  required_version = ">=1.6"
   required_providers {
     aws = {
       source                = "hashicorp/aws"
-      version               = "~>5.0"
+      version               = "=>5.0"
       configuration_aliases = [aws.event-source-account]
     }
   }
