@@ -2,7 +2,7 @@
 
 This solution enables you to dynamically manage [AWS IAM Identity Center](https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html) Permission Sets through infrastructure as code using a CI/CD pipeline built with native AWS services. Furthermore, it enables a seamless integration of the Permission Set assignment mechanism with the [AWS Control Tower](https://docs.aws.amazon.com/controltower/latest/userguide/what-is-control-tower.html) lifecycle events or [Account Factory for Terraform](https://docs.aws.amazon.com/controltower/latest/userguide/aft-overview.html) (AFT) environment, providing dynamic identity configurations for both new and existing AWS accounts.
 
-Amazon EventBridge rules to monitor AWS account creation and update, ensuring your identity configurations remain synchronized with your organizational structure. After creating/updating accounts in Control Tower or AFT, the pipeline will be triggered to evaluate a set of JSON files with Permission Set definitions and assignment rules, to then apply and synchronize the settings across all accounts.
+Amazon EventBridge rules monitor AWS account creation and update, ensuring your identity configurations remain synchronized with your organizational structure. After creating/updating accounts in Control Tower or AFT, the pipeline will be triggered to evaluate a set of JSON files with Permission Set definitions and assignment rules, to then apply and synchronize the settings across all accounts.
 
 ## Architecture
 
@@ -25,7 +25,7 @@ EventBridge serves as the central event processing service, capturing events gen
 
 When AFT integration events reach the AFT management account, they automatically trigger multiple downstream processes intrinsic to the AFT. Once the AFT account customization workflow has been completed, it publishes a message into the dedicated aft-notifications SNS topic, that triggers the aft-new-account-forward-event Lambda function implemented by the solution. This Lambda send the event to the solution account, where it will be used to start the pipeline.
 
-### Infrastructure as Code Pipeline Operations
+### Infrastructure as Code Pipeline
 
 The solution pipeline operates as a fully automated deployment mechanism. The AWS CodePipeline service continuously monitors the repository for changes. Upon detecting new commits, it automatically initiates the deployment workflow and initiates a sequential process that includes validation and execution phases. The system runs Terraform plan operations to identify proposed changes, followed by Terraform apply commands to implement those changes in the AWS environment. Notably, the pipeline run without manual approval gates, enabling rapid deployment of infrastructure changes while maintaining auditability through pipeline logs and Terraform state files.
 
@@ -45,30 +45,30 @@ JSON file with a sample Permission Set:
 
 ```json
 {
-  "Name": "ps-billing", // Permission set identifier
-  "Comment": "Sample permission set for billing access", // Comment to document the purpose of the permission set
-  "Description": "Billing access in AWS", // Detailed description
-  "SessionDuration": "PT4H", // Session duration = 4 hours (ISO 8601 format)
-  "ManagedPolicies": [ // List of AWS IAM managed policies
+  "Name": "ps-billing", 
+  "Comment": "Sample permission set for billing access", 
+  "Description": "Billing access in AWS", 
+  "SessionDuration": "PT4H", 
+  "ManagedPolicies": [ 
     "arn:aws:iam::aws:policy/job-function/Billing",
     "arn:aws:iam::aws:policy/job-function/SupportUser",
     "arn:aws:iam::aws:policy/AWSSupportAccess",
     "arn:aws:iam::aws:policy/job-function/ViewOnlyAccess"
   ],
-  "CustomerPolicies": [], // References to IAM policies previously created
-  "CustomPolicy": {}, // Inline IAM policy defined directly in the permission set
-  "PermissionBoundary": {  // AWS or customer managed IAM policy to be used as boundary
+  "CustomerPolicies": [], 
+  "CustomPolicy": {}, 
+  "PermissionBoundary": {  
     "ManagedPolicy": "",
     "CustomerPolicy": ""
   },
-  "Assignments": [ // Define the assignment rules
+  "Assignments": [ 
     {
-      "all_accounts": true, // Apply to ALL active AWS accounts in organization
-      "principal": "G_BILLING_USERS", // Group/user name in Identity Center
-      "type": "GROUP", // Can be "GROUP" or "USER"
-      "account_id": [], // List of AWS account ID (empty since all_accounts=true)
-      "account_ou": [], // List of AWS Organizational Unit IDs with target AWS accounts
-      "account_tag": [] // List of tags (key:value) to match AWS Organization accounts tags
+      "all_accounts": true, 
+      "principal": "G_BILLING_USERS", 
+      "type": "GROUP", 
+      "account_id": [], 
+      "account_ou": [], 
+      "account_tag": [] 
     }
   ]
 }
@@ -88,10 +88,6 @@ See the JSON schema in the module [documentation](https://registry.terraform.io/
 ## Limitations
 
 The pipeline uses AWS native resources and Terraform Open-Source version, it's not prepared to make calls to third-party ecosystems, such as Terraform Cloud.
-
-## Versions
-
-- Terraform: >=1.6
 
 ## Security
 
