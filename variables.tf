@@ -8,7 +8,7 @@ variable "solution_name" {
 }
 
 variable "repository_name" {
-  description = "VCS repository name. For external VCS, inform the full repository path (e.g. GitHubOrganization/repository-name)."
+  description = "VCS repository name. For external VCS provider, inform the full repository path (e.g. GitHubOrganization/repository-name)."
   type        = string
   default     = "aws-ps-pipeline"
 }
@@ -71,7 +71,7 @@ variable "account_lifecycle_events_source" {
       - For CT as the source account, inform the provider with access to CT management account:
         ```
           providers = {
-            aws.event-source-account = aws.org-management
+            aws.event-source-account = aws.ct-management
           }
         ```
 
@@ -83,7 +83,7 @@ variable "account_lifecycle_events_source" {
     ```
   EOF
   type        = string
-  default     = "None"
+  default     = "CT"
   validation {
     condition     = contains(["AFT", "CT", "None"], var.account_lifecycle_events_source)
     error_message = "Valid values for account_lifecycle_events_source are: AFT, CT or None"

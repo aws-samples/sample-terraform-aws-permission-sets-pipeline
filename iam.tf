@@ -33,7 +33,7 @@ resource "aws_iam_role_policy" "codebuild_policy" {
   name = "${var.solution_name}-codebuild-policy"
   role = aws_iam_role.codebuild.id
   policy = templatefile("${path.module}/assets/role-policies/codebuild_role_policy.json", {
-    region                   = data.aws_region.current.name
+    region                   = data.aws_region.current.region
     account_id               = data.aws_caller_identity.current.account_id
     solution_name            = var.solution_name
     pipeline_bucket_arn      = aws_s3_bucket.pipeline.arn
@@ -58,7 +58,7 @@ resource "aws_iam_role_policy" "codepipeline_policy" {
   name = "${var.solution_name}-codepipeline-policy"
   role = aws_iam_role.codepipeline.id
   policy = templatefile("${path.module}/assets/role-policies/codepipeline_role_policy.json", {
-    region              = data.aws_region.current.name
+    region              = data.aws_region.current.region
     account_id          = data.aws_caller_identity.current.account_id
     solution_name       = var.solution_name
     pipeline_bucket_arn = aws_s3_bucket.pipeline.arn
@@ -81,7 +81,7 @@ resource "aws_iam_role_policy" "lambda_policy" {
   name = "${var.solution_name}-lambda-policy"
   role = aws_iam_role.lambda[0].id
   policy = templatefile("${path.module}/assets/role-policies/lambda_role_policy.json", {
-    region        = data.aws_region.current.name
+    region        = data.aws_region.current.region
     account_id    = data.aws_ssm_parameter.aft_management_account_id[0].value
     event_bus_arn = aws_cloudwatch_event_bus.pipeline[0].arn
   })

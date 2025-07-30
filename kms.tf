@@ -72,7 +72,7 @@ data "aws_iam_policy_document" "cmk_policy" {
     }
     principals {
       type        = "Service"
-      identifiers = ["logs.${data.aws_region.current.name}.amazonaws.com"]
+      identifiers = ["logs.${data.aws_region.current.region}.amazonaws.com"]
     }
   }
 }

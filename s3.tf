@@ -6,7 +6,7 @@ resource "aws_s3_bucket" "pipeline" {
   #checkov:skip=CKV2_AWS_61: This bucket does not need a lifecycle configuration
   #checkov:skip=CKV_AWS_144: This bucket does not need cross-region replication enabled
   #checkov:skip=CKV_AWS_18: This bucket does not need access logging enabled
-  bucket = "${var.solution_name}-codebuild-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}"
+  bucket = "${var.solution_name}-codebuild-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.region}"
   tags   = var.tags
 }
 
@@ -42,7 +42,7 @@ resource "aws_s3_bucket" "tf_backend" {
   #checkov:skip=CKV2_AWS_61: This bucket does not need a lifecycle configuration
   #checkov:skip=CKV_AWS_144: This bucket does not need cross-region replication enabled
   #checkov:skip=CKV_AWS_18: This bucket does not need access logging enabled
-  bucket = "${var.solution_name}-tf-backend-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}"
+  bucket = "${var.solution_name}-tf-backend-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.region}"
   tags   = var.tags
 }
 

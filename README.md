@@ -104,14 +104,13 @@ This library is licensed under the MIT-0 License. See the LICENSE file.
 | Name | Version |
 |------|---------|
 | terraform | >=1.6 |
-| aws | =>5.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | =>5.0 |
-| aws.event-source-account | =>5.0 |
+| aws | >=6.0 |
+| aws.event-source-account | >=6.0 |
 
 ## Modules
 
@@ -175,11 +174,11 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| account\_lifecycle\_events\_source | Define from where to capture account lifecycle events: AFT, Control Tower (CT) or None. Based on this choice, you also must change the provider for the source account (aws.event-source-account). For exemple:    - For AFT as the source account, inform the provider with access to AFT management account: ```providers = { aws.event-source-account = aws.aft-management }``` - For CT as the source account, inform the provider with access to CT management account: ```providers = { aws.event-source-account = aws.org-management }``` - If you don't want to use account lifecycle events to trigger the pipeline, select None and inform the aws default provider: ```providers = { aws.event-source-account = aws }``` | `string` | `"None"` | no |
+| account\_lifecycle\_events\_source | Define from where to capture account lifecycle events: AFT, Control Tower (CT) or None. Based on this choice, you also must change the provider for the source account (aws.event-source-account). For exemple:    - For AFT as the source account, inform the provider with access to AFT management account: ```providers = { aws.event-source-account = aws.aft-management }``` - For CT as the source account, inform the provider with access to CT management account: ```providers = { aws.event-source-account = aws.ct-management }``` - If you don't want to use account lifecycle events to trigger the pipeline, select None and inform the aws default provider: ```providers = { aws.event-source-account = aws }``` | `string` | `"CT"` | no |
 | branch\_name | Repository main branch name. | `string` | `"main"` | no |
 | enable\_vpc\_config | Enable VPC configuration for CodeBuild project and CodeConnections Host. | `bool` | `false` | no |
 | github\_enterprise\_url | GitHub enterprise URL, if GitHub Enterprise is being used. (inform only if vcs\_provider = githubenterprise) | `string` | `"null"` | no |
-| repository\_name | VCS repository name. For external VCS, inform the full repository path (e.g. GitHubOrganization/repository-name). | `string` | `"aws-ps-pipeline"` | no |
+| repository\_name | VCS repository name. For external VCS provider, inform the full repository path (e.g. GitHubOrganization/repository-name). | `string` | `"aws-ps-pipeline"` | no |
 | solution\_name | Solution name. | `string` | `"aws-ps-pipeline"` | no |
 | tags | n/a | `map(string)` | `{}` | no |
 | vcs\_provider | Customer VCS Provider - valid inputs are codecommit, github, or githubenterprise | `string` | `"github"` | no |
