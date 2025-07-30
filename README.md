@@ -84,6 +84,7 @@ See the JSON schema in the module [documentation](https://registry.terraform.io/
 - Optionally you can use AFT in conjunction with AWS Control Tower.
 - Prepare the VCS repo that will handle the main code. You can see a sample in the solution [repository](https://github.com/aws-samples/sample-terraform-aws-permission-sets-pipeline/tree/main/samples/basic).
 - Prepare an IAM Identity Center delegated administrator AWS account to receive the solution. See more in [AWS IAM Identity Center delegated administration](https://docs.aws.amazon.com/singlesignon/latest/userguide/delegated-admin.html).
+- AWS necessary resources for the Terraform backend management, such as S3 bucket and Amazon DynamoDB
 
 ## Limitations
 

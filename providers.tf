@@ -9,6 +9,6 @@ provider "aws" {
   alias  = "event-source-account"
   region = "{region}"
   assume_role {
-    role_arn = "arn:aws:iam::{account_id}:role/{role_name}"
+    role_arn = "{role_arn}"
   }
 }
